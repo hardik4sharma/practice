@@ -5,7 +5,7 @@ jobs:
   first_job:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/upload-artifact@v4
+      - uses: actions/checkout@v4
       - run: echo "Hello from Git hub" | ls -al
       - run: zip -r dummy-handler.zip apps/dummy-handler/main.py
       - uses: actions/upload-artifact@v4
