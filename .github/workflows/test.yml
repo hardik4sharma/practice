@@ -8,7 +8,7 @@ jobs:
       - uses: actions/upload-artifact@v4
       - run: echo "Hello from Git hub" | ls -al
       - run: zip -r dummy-handler.zip apps/dummy-handler/main.py
-      - uses: actions/upload-checkout@v4
+      - uses: actions/upload-artifacts@v4
         with:
           name: zip-file
           path: ./dummy-handler.zip
