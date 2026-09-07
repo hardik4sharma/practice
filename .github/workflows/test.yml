@@ -7,7 +7,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: echo "Hello from Git hub" | ls -al
-      - run: zip -r dummy-handler.zip apps/dummy-handler/main.py
+      - run: |
+         for item in dummy-handler
+         do
+            zip -r $item.zip apps/$item/main.py
+         done
       - uses: actions/upload-artifact@v4
         with:
           name: zip-file
