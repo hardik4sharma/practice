@@ -23,3 +23,8 @@ jobs:
           role-to-assume: arn:aws:iam::236934871277:role/cicd-pipeline
           aws-region: ap-south-1
       - run: aws s3 ls
+      - uses: hashicorp/setup-terraform@v3
+      - run: terraform init
+        working-directory: infra
+      - run: terraform plan
+        working-directory: infra
