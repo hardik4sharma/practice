@@ -3,6 +3,8 @@ on:
 
 jobs:
   first_job:
+    permissions:
+      id-token: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -16,3 +18,8 @@ jobs:
         with:
           name: zip-file
           path: ./dummy-handler.zip
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::236934871277:role/cicd-pipeline
+          aws-region: ap-south-1
+      - run: aws s3 ls
