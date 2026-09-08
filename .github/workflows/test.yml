@@ -28,3 +28,21 @@ jobs:
         working-directory: infra
       - run: terraform plan
         working-directory: infra
+  apply_job:
+    needs: first_job
+    environment: production
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+       - uses: actions/checkout@v4
+       - uses: aws-actions/configure-aws-credentials@v4
+         with:
+          role-to-assume: arn:aws:iam::236934871277:role/cicd-pipeline
+          aws-region: ap-south-1
+       - uses: hashicorp/setup-terraform@v3
+       - run: terraform init
+         working-directory: infra
+       - run: terraform apply
+         working-directory: infra
+    
