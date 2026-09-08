@@ -43,6 +43,6 @@ jobs:
        - uses: hashicorp/setup-terraform@v3
        - run: terraform init
          working-directory: infra
-       - run: terraform apply
+       - run: terraform apply -auto-approve
          working-directory: infra
     
