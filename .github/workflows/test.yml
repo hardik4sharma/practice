@@ -26,8 +26,12 @@ jobs:
       - uses: hashicorp/setup-terraform@v3
       - run: terraform init
         working-directory: infra
-      - run: terraform plan
+      - run: terraform plan -out=tfplan
         working-directory: infra
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tfplan
+          path: ./infra/tfplan
   apply_job:
     needs: first_job
     environment: production
@@ -40,9 +44,12 @@ jobs:
          with:
           role-to-assume: arn:aws:iam::236934871277:role/cicd-pipeline
           aws-region: ap-south-1
+       - uses: actions/download-artifact@v4
+         with:
+           name: tfplan
        - uses: hashicorp/setup-terraform@v3
        - run: terraform init
          working-directory: infra
-       - run: terraform apply -auto-approve
+       - run: terraform apply tfplan
          working-directory: infra
     
