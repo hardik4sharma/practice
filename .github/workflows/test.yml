@@ -50,6 +50,6 @@ jobs:
        - uses: hashicorp/setup-terraform@v3
        - run: terraform init
          working-directory: infra
-       - run: terraform apply tfplan
+       - run: terraform apply "tfplan"
          working-directory: infra
     
