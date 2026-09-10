@@ -47,6 +47,7 @@ jobs:
        - uses: actions/download-artifact@v4
          with:
            name: tfplan
+           path: infra
        - uses: hashicorp/setup-terraform@v3
        - run: terraform init
          working-directory: infra
